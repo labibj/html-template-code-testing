@@ -1379,17 +1379,40 @@ window.addEventListener('load', function() {
     });
 </script>
     <!-- End of bodyEnd -->
-	<script>
-  // Select the video using CSS selector path
-  const video = document.querySelector('.framer-176rtux-container video');
 
-  // Change the video source
-  if (video) {
+<script>
+  const container = document.querySelector('.framer-176rtux-container');
+
+  if (container) {
+    const video = document.createElement('video');
+
+    // Set attributes
     video.src = "video/mov_bbb.mp4";
-	video.muted = true; // Set muted via JavaScript
-    video.load(); // Reload with the new source
-    video.play(); // Optional: autoplay
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true; // Required for autoplay
+    video.playsInline = true; // For mobile
+    video.preload = "auto";
+
+    // Optional: styling
+    video.style.cursor = "auto";
+    video.style.width = "100%";
+    video.style.height = "100%";
+    video.style.borderRadius = "0px";
+    video.style.display = "block";
+    video.style.objectFit = "cover";
+    video.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    video.style.objectPosition = "50% 50%";
+
+    // Append to container
+    container.appendChild(video);
+
+    // Try to play the video
+    video.play().catch(err => {
+      console.warn("Autoplay failed:", err);
+    });
   }
 </script>
+
 </body>
 </html>
