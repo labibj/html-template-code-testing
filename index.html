@@ -1384,17 +1384,22 @@ window.addEventListener('load', function() {
   const container = document.querySelector('.framer-176rtux-container');
 
   if (container) {
-    const video = document.createElement('video');
+    // Remove existing video if any
+    const existingVideo = container.querySelector('video');
+    if (existingVideo) {
+      container.removeChild(existingVideo);
+    }
 
-    // Set attributes
+    // Create a new video element
+    const video = document.createElement('video');
     video.src = "video/mov_bbb.mp4";
     video.autoplay = true;
     video.loop = true;
     video.muted = true; // Required for autoplay
-    video.playsInline = true; // For mobile
+    video.playsInline = true;
     video.preload = "auto";
 
-    // Optional: styling
+    // Apply styling
     video.style.cursor = "auto";
     video.style.width = "100%";
     video.style.height = "100%";
@@ -1404,15 +1409,16 @@ window.addEventListener('load', function() {
     video.style.backgroundColor = "rgba(0, 0, 0, 0)";
     video.style.objectPosition = "50% 50%";
 
-    // Append to container
+    // Append new video
     container.appendChild(video);
 
-    // Try to play the video
+    // Attempt to autoplay
     video.play().catch(err => {
       console.warn("Autoplay failed:", err);
     });
   }
 </script>
+
 
 </body>
 </html>
